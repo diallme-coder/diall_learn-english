@@ -1,0 +1,14 @@
+{
+  "_synthetic": true,
+  "_note": "SYNTHETIC fixture, hand-labeled to look like a Whisper-style transcript. Not real ASR output. 'morning' is a correctly recognised word with no confidence field at all (some ASR verbose_json outputs omit it); it must be treated as SCORE_THRESHOLDS.defaultConfidence (0.75), so it must not become 'unsure' and must score <= 80.",
+  "referenceText": "good morning",
+  "transcript": {
+    "text": "good morning",
+    "language": "en",
+    "durationSec": 0.9,
+    "words": [
+      { "text": "good", "startSec": 0.0, "endSec": 0.4, "confidence": 0.95 },
+      { "text": "morning", "startSec": 0.4, "endSec": 0.9 }
+    ]
+  }
+}

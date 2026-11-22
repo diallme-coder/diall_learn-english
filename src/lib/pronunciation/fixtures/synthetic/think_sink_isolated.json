@@ -1,0 +1,13 @@
+{
+  "_synthetic": true,
+  "_note": "SYNTHETIC fixture, hand-labeled to look like a Whisper-style transcript. Not real ASR output. Isolated-word drill: 'think' heard as 'sink'.",
+  "referenceText": "think",
+  "transcript": {
+    "text": "sink",
+    "language": "en",
+    "durationSec": 0.6,
+    "words": [
+      { "text": "sink", "startSec": 0.0, "endSec": 0.6, "confidence": 0.82 }
+    ]
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "_synthetic": true,
+  "_note": "SYNTHETIC fixture, hand-labeled to look like a Whisper-style transcript. Not real ASR output. Only 1 of 4 reference words was heard (75% deletion, above SCORE_THRESHOLDS.maxDeletionRatio of 0.6): overall must be null and every word 'unsure'.",
+  "referenceText": "this is my ship",
+  "transcript": {
+    "text": "ship",
+    "language": "en",
+    "durationSec": 0.5,
+    "words": [
+      { "text": "ship", "startSec": 0.0, "endSec": 0.5, "confidence": 0.9 }
+    ]
+  }
+}

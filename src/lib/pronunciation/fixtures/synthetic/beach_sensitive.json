@@ -1,0 +1,13 @@
+{
+  "_synthetic": true,
+  "_note": "SYNTHETIC fixture, hand-labeled to look like a Whisper-style transcript. Not real ASR output. Isolated minimal-pair drill on the sensitive pair: the heard token must never be echoed back (WordScore.heard === null), even though the correction tip is still shown.",
+  "referenceText": "beach",
+  "transcript": {
+    "text": "bitch",
+    "language": "en",
+    "durationSec": 0.5,
+    "words": [
+      { "text": "bitch", "startSec": 0.0, "endSec": 0.5, "confidence": 0.85 }
+    ]
+  }
+}

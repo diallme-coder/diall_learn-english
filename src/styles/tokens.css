@@ -1,0 +1,213 @@
+/* Parle-to-Speak design tokens.
+   Direction: "Studio Bleu" - ink navy + cool fog neutrals, one hot coral reserved for the mic
+   (the single memorable element). Not the editorial default: this is a utility/learning tool.
+   Fonts: self-host via next/font (not available offline here). Stacks degrade to system fonts.
+   Display: Bricolage Grotesque. Body: Atkinson Hyperlegible (designed for legibility).
+   Phonetics: Charis SIL / Noto Sans (IPA glyph coverage). */
+
+:root {
+  color-scheme: light dark;
+
+  /* ---------- Type families ---------- */
+  --font-display: "Bricolage Grotesque", "Atkinson Hyperlegible", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Atkinson Hyperlegible", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-ipa: "Charis SIL", "Noto Sans", "Segoe UI", "DejaVu Sans", serif;
+
+  /* ---------- Type scale (major third 1.25, base 1rem=16px) ---------- */
+  --text-xs: 0.8rem;      /* 12.8px: captions, legends only */
+  --text-sm: 0.875rem;    /* 14px */
+  --text-base: 1rem;      /* 16px */
+  --text-lg: 1.25rem;     /* 20px */
+  --text-xl: 1.5625rem;   /* 25px */
+  --text-2xl: 1.953rem;   /* 31px */
+  --text-3xl: 2.441rem;   /* 39px: practice sentence on large screens */
+  --text-practice: clamp(1.5625rem, 1.2rem + 1.8vw, 2.441rem);
+  --leading-tight: 1.2;
+  --leading-normal: 1.5;
+  --leading-loose: 1.7;   /* highlighted words need room for underlines */
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-bold: 700;
+  --tracking-tight: -0.01em;
+  --tracking-wide: 0.04em;
+  --measure: 62ch;
+
+  /* ---------- Spacing (4px base) ---------- */
+  --space-0: 0;
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+  --touch-min: 2.75rem;   /* 44px minimum target (WCAG 2.2 target size AAA-friendly; AA needs 24px) */
+  --touch-mic: 5rem;      /* 80px primary mic */
+  --page-gutter: var(--space-4);
+  --content-max: 30rem;
+
+  /* ---------- Radius ---------- */
+  --radius-sm: 0.5rem;
+  --radius-md: 0.875rem;
+  --radius-lg: 1.25rem;
+  --radius-pill: 999px;
+
+  /* ---------- Motion ---------- */
+  --duration-instant: 80ms;
+  --duration-fast: 150ms;
+  --duration-base: 240ms;
+  --duration-slow: 420ms;
+  --duration-pulse: 1600ms;
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --ease-enter: cubic-bezier(0, 0, 0.2, 1);
+  --ease-exit: cubic-bezier(0.4, 0, 1, 1);
+
+  /* ---------- Raw palette (light) ---------- */
+  --ink-900: #0f1b2d;
+  --ink-700: #34445c;
+  --ink-600: #4a5a70;
+  --fog-50: #f5f7fa;
+  --fog-100: #eaeff5;
+  --fog-300: #c9d3e0;
+  --white: #ffffff;
+  --blue-600: #0b5fa5;
+  --blue-700: #084a83;
+  --blue-100: #dcebf8;
+  --coral-600: #c9341a;
+  --coral-700: #a52913;
+  --green-700: #17683a;
+  --green-100: #dff3e6;
+  --amber-100: #ffe066;
+  --amber-800: #7a5200;
+  --red-100: #fde3e1;
+  --red-700: #b3261e;
+
+  /* ---------- Semantic colour (light) ---------- */
+  --color-bg: var(--fog-50);
+  --color-surface: var(--white);
+  --color-surface-raised: var(--white);
+  --color-surface-sunken: var(--fog-100);
+  --color-border: var(--fog-300);
+  --color-border-strong: var(--ink-600);
+  --color-text: var(--ink-900);
+  --color-text-muted: var(--ink-600);
+  --color-text-on-primary: var(--white);
+  --color-primary: var(--blue-600);
+  --color-primary-hover: var(--blue-700);
+  --color-primary-subtle: var(--blue-100);
+  --color-mic: var(--coral-600);
+  --color-mic-hover: var(--coral-700);
+  --color-text-on-mic: var(--white);
+  --color-focus: var(--blue-700);
+  --color-success: var(--green-700);
+  --color-success-subtle: var(--green-100);
+  --color-danger: var(--red-700);
+  --color-danger-subtle: var(--red-100);
+  --color-scrim: rgb(15 27 45 / 0.5);
+
+  /* ---------- Word highlight tokens (light) ----------
+     Each state = colour (fill) + non-colour cue (underline style/thickness/weight).
+     Text colour on every fill stays --color-text. */
+  --hl-ok-bg: transparent;
+  --hl-ok-line-color: var(--green-700);
+  --hl-ok-line-style: dotted;
+  --hl-ok-line-width: 1px;
+  --hl-ok-weight: var(--weight-regular);
+
+  --hl-warn-bg: var(--amber-100);
+  --hl-warn-line-color: var(--amber-800);
+  --hl-warn-line-style: wavy;
+  --hl-warn-line-width: 2px;
+  --hl-warn-weight: var(--weight-medium);
+
+  --hl-err-bg: var(--red-100);
+  --hl-err-line-color: var(--red-700);
+  --hl-err-line-style: double;
+  --hl-err-line-width: 3px;
+  --hl-err-weight: var(--weight-bold);
+
+  --hl-unsure-line-color: var(--ink-600);   /* low ASR confidence: neutral dashed, never red */
+  --hl-unsure-line-style: dashed;
+  --hl-unsure-line-width: 1px;
+  --hl-underline-offset: 0.2em;
+
+  /* Glyph cues paired with highlights (also exposed to assistive tech via aria-label in markup) */
+  --hl-ok-glyph: "\2713";     /* check */
+  --hl-warn-glyph: "\007E";   /* tilde */
+  --hl-err-glyph: "\2717";    /* ballot x */
+
+  /* ---------- Elevation (light) ---------- */
+  --elev-0: none;
+  --elev-1: 0 1px 2px rgb(15 27 45 / 0.08), 0 1px 1px rgb(15 27 45 / 0.06);
+  --elev-2: 0 4px 12px rgb(15 27 45 / 0.12), 0 1px 3px rgb(15 27 45 / 0.08);
+  --elev-3: 0 12px 28px rgb(15 27 45 / 0.18), 0 2px 6px rgb(15 27 45 / 0.1);
+  --elev-mic: 0 6px 18px rgb(201 52 26 / 0.35);
+
+  /* Z layers */
+  --z-sticky: 10;
+  --z-sheet: 40;
+  --z-toast: 60;
+}
+
+/* ---------- Dark mode ---------- */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: #0b1424;
+    --color-surface: #13213a;
+    --color-surface-raised: #1a2b49;
+    --color-surface-sunken: #0e1a2f;
+    --color-border: #2c4066;
+    --color-border-strong: #9fb0c8;
+    --color-text: #eaf0f8;
+    --color-text-muted: #a9b7cb;
+    --color-text-on-primary: #08111f;
+    --color-primary: #7ab8f0;
+    --color-primary-hover: #a0cdf5;
+    --color-primary-subtle: #1b3556;
+    --color-mic: #ff7a59;
+    --color-mic-hover: #ff946f;
+    --color-text-on-mic: #1a0a05;
+    --color-focus: #ffd43b;
+    --color-success: #6fd69a;
+    --color-success-subtle: #12341f;
+    --color-danger: #ff8a84;
+    --color-danger-subtle: #3a1715;
+    --color-scrim: rgb(0 0 0 / 0.65);
+
+    --hl-ok-line-color: #6fd69a;
+    --hl-warn-bg: rgb(255 212 59 / 0.26);
+    --hl-warn-line-color: #ffd43b;
+    --hl-err-bg: rgb(255 107 99 / 0.28);
+    --hl-err-line-color: #ff8a84;
+    --hl-unsure-line-color: #a9b7cb;
+
+    --elev-1: 0 1px 2px rgb(0 0 0 / 0.5);
+    --elev-2: 0 4px 12px rgb(0 0 0 / 0.5);
+    --elev-3: 0 12px 28px rgb(0 0 0 / 0.6);
+    --elev-mic: 0 6px 18px rgb(255 122 89 / 0.3);
+  }
+}
+
+/* ---------- Forced colors (Windows High Contrast): rely on patterns, not fills ---------- */
+@media (forced-colors: active) {
+  :root {
+    --hl-warn-bg: transparent;
+    --hl-err-bg: transparent;
+    --hl-warn-line-color: CanvasText;
+    --hl-err-line-color: CanvasText;
+    --hl-ok-line-color: CanvasText;
+    --hl-unsure-line-color: CanvasText;
+  }
+}
+
+/* ---------- Reduced motion: collapse durations; components also drop animations ---------- */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-instant: 0.01ms;
+    --duration-fast: 0.01ms;
+    --duration-base: 0.01ms;
+    --duration-slow: 0.01ms;
+    --duration-pulse: 0.01ms;
+  }
+}

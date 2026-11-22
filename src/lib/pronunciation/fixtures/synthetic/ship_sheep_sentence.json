@@ -1,0 +1,16 @@
+{
+  "_synthetic": true,
+  "_note": "SYNTHETIC fixture, hand-labeled to look like a Whisper-style transcript. Not real ASR output. Two confusions in one sentence: dh_as_z ('this' -> 'zis') and ih_vs_iy ('ship' -> 'sheep'); dh_as_z should win priority for primaryTip (th > h > vowel).",
+  "referenceText": "this is my ship",
+  "transcript": {
+    "text": "zis is my sheep",
+    "language": "en",
+    "durationSec": 1.3,
+    "words": [
+      { "text": "zis", "startSec": 0.0, "endSec": 0.3, "confidence": 0.78 },
+      { "text": "is", "startSec": 0.3, "endSec": 0.5, "confidence": 0.95 },
+      { "text": "my", "startSec": 0.5, "endSec": 0.7, "confidence": 0.9 },
+      { "text": "sheep", "startSec": 0.7, "endSec": 1.3, "confidence": 0.8 }
+    ]
+  }
+}

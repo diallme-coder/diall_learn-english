@@ -1,0 +1,15 @@
+{
+  "_synthetic": true,
+  "_note": "SYNTHETIC fixture, hand-labeled to look like a Whisper-style transcript. Not real ASR output. Sentence shadowing: same th_as_s confusion as think_sink_isolated.json, but inside a sentence, so it must score 'warn', never 'error'.",
+  "referenceText": "I think so",
+  "transcript": {
+    "text": "I sink so",
+    "language": "en",
+    "durationSec": 1.1,
+    "words": [
+      { "text": "I", "startSec": 0.0, "endSec": 0.2, "confidence": 0.95 },
+      { "text": "sink", "startSec": 0.2, "endSec": 0.7, "confidence": 0.8 },
+      { "text": "so", "startSec": 0.7, "endSec": 1.1, "confidence": 0.9 }
+    ]
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "name": "parle-to-speak",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.6"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "test": "node --experimental-strip-types --test 'src/**/*.test.ts'",
+    "typecheck:lib": "/home/claude/.npm-global/bin/tsc -p tsconfig.lib.json --typeRoots /opt/npm-tools/node_modules/@types"
+  },
+  "dependencies": {
+    "next": "^15",
+    "react": "^19",
+    "react-dom": "^19"
+  },
+  "devDependencies": {
+    "typescript": "^5.8",
+    "@types/node": "^22",
+    "@types/react": "^19",
+    "@types/react-dom": "^19"
+  }
+}

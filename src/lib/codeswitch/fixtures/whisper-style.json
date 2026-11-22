@@ -1,0 +1,86 @@
+[
+  {
+    "id": "traffic-jam",
+    "transcript": "yeah so i was stuck in a huge embouteillage this morning on the way to work",
+    "expectedSpanTexts": ["embouteillage"],
+    "expectedCardCount": 1,
+    "note": "lowercase ASR output, no comma before the French word"
+  },
+  {
+    "id": "loanwords-not-flagged",
+    "transcript": "i grabbed a croissant and a café before the meeting",
+    "expectedSpanTexts": [],
+    "expectedCardCount": 0,
+    "note": "loanwords must never produce a span"
+  },
+  {
+    "id": "du-coup-no-comma",
+    "transcript": "honestly du coup we just left early",
+    "expectedSpanTexts": ["du coup"],
+    "expectedCardCount": 1,
+    "note": "Whisper rarely inserts the comma a textbook example would have"
+  },
+  {
+    "id": "actuellement-false-friend",
+    "transcript": "actuellement i work in lyon as a developer",
+    "expectedSpanTexts": ["actuellement"],
+    "expectedCardCount": 1,
+    "note": "sentence-initial capitalisation case is lowercase here, as real ASR often is"
+  },
+  {
+    "id": "je-sais-pas-all-french",
+    "transcript": "je sais pas maybe we should just wait",
+    "expectedSpanTexts": ["je sais pas"],
+    "expectedCardCount": 1,
+    "note": "phrase match spans all three words"
+  },
+  {
+    "id": "genre-filler",
+    "transcript": "it was like genre crazy over there",
+    "expectedSpanTexts": ["genre"],
+    "expectedCardCount": 1,
+    "note": "filler sense of genre, not adjacent to a determiner"
+  },
+  {
+    "id": "genre-english-noun",
+    "transcript": "this is a great music genre to study english with",
+    "expectedSpanTexts": [],
+    "expectedCardCount": 0,
+    "note": "english noun sense of genre, adjacent to 'music', must not be flagged"
+  },
+  {
+    "id": "boulangerie-mid-sentence",
+    "transcript": "i need to go to the boulangerie before it closes",
+    "expectedSpanTexts": ["boulangerie"],
+    "expectedCardCount": 1,
+    "note": "run-on ASR sentence, no punctuation at all"
+  },
+  {
+    "id": "machin-needs-clarification",
+    "transcript": "there was some machin on the table i could not name",
+    "expectedSpanTexts": [],
+    "expectedCardCount": 0,
+    "note": "untranslatable discourse word; needsClarification true, no span/card guessed"
+  },
+  {
+    "id": "patron-and-dossier",
+    "transcript": "my patron asked me to finish the dossier by friday",
+    "expectedSpanTexts": ["patron", "dossier"],
+    "expectedCardCount": 2,
+    "note": "two separate lexicon words in one ASR run, capped well under the 3-card limit"
+  },
+  {
+    "id": "en-fait-opener",
+    "transcript": "en fait i think we should reschedule the reunion",
+    "expectedSpanTexts": ["en fait"],
+    "expectedCardCount": 1,
+    "note": "ASR left the capital off a sentence-initial phrase; plain 'reunion' (no accent) must not match 'réunion'"
+  },
+  {
+    "id": "bref-filler-odd-casing",
+    "transcript": "he said Bref lets just go",
+    "expectedSpanTexts": ["Bref"],
+    "expectedCardCount": 1,
+    "note": "occasional odd mid-sentence capitalisation from ASR; filler must still match case-insensitively"
+  }
+]

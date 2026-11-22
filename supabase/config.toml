@@ -1,0 +1,9 @@
+# Minimal Supabase CLI config for Parle-to-Speak.
+# This project does not use most Supabase CLI features offline; this file
+# exists so `supabase` CLI commands (migration apply, local dev) recognise
+# the project directory structure used by supabase/migrations/**.
+project_id = "parle-to-speak"
+
+[db]
+port = 54322
+major_version = 16

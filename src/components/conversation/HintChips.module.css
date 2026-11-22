@@ -1,0 +1,16 @@
+.group {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.explain {
+  min-width: var(--touch-min);
+  min-height: var(--touch-min);
+  border-radius: var(--radius-pill);
+  border: 2px solid var(--color-border-strong);
+  background: var(--color-surface);
+  color: var(--color-text-muted);
+  font-weight: var(--weight-bold);
+  cursor: pointer;
+}

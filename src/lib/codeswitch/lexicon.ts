@@ -1,0 +1,221 @@
+// src/lib/codeswitch/lexicon.ts
+//
+// FR_LEXICON: common French words/phrases a French speaker might fall back
+// to mid-English-sentence, with their English suggestion. Confidence and
+// card-building live in detector.ts/sidecards.ts; this file is pure data.
+//
+// Resolution notes (docs/PLAN.md, Unit C):
+// - 'genre' appears ONLY here, in the filler sense ("it was genre crazy",
+//   "genre I went"). The English-noun sense ("a music genre", "the genre")
+//   is recognised by detector.ts via an adjacency check against a small set
+//   of preceding determiner/noun words, and is never flagged as French. So
+//   'genre' has exactly one classification path: this lexicon entry, used
+//   only when that adjacency check says "not the English noun sense".
+//   It must never also appear in allowlist.ts.
+// - 'rester' ("to stay") is listed below as a false friend because it looks
+//   like the English word "rest" and French speakers sometimes expect it to
+//   behave like one. It is NOT itself an English word, so it must never be
+//   added to allowlist.ts's HOMOGRAPHS list, which holds only strings that
+//   are ALSO valid, differently-meant English words (e.g. "pain", "sale").
+//   Putting 'rester' there would wrongly suppress detection of real French
+//   use of "rester".
+import type { LexiconEntry } from '../types.ts';
+
+export const FR_LEXICON: readonly LexiconEntry[] = [
+  // ---- Homographs: spelled like an English word but used here as French.
+  // Also listed in allowlist.ts's HOMOGRAPHS set, which suppresses them by
+  // default; detector.ts re-admits them only when adjacent to another
+  // already-confirmed French span. ----
+  { fr: 'pain', en: 'bread', kind: 'word', note: "Pas la douleur ('pain' en anglais)." },
+  { fr: 'chat', en: 'cat', kind: 'word' },
+  { fr: 'coin', en: 'corner', kind: 'word' },
+  { fr: 'four', en: 'oven', kind: 'word' },
+  { fr: 'car', en: 'because', kind: 'word', note: "Ou 'bus' (le car scolaire)." },
+  { fr: 'plus', en: 'more', kind: 'word', note: "Ou 'no more' (ne... plus)." },
+  { fr: 'sale', en: 'dirty', kind: 'word' },
+  { fr: 'son', en: 'his/her', kind: 'word', note: "Ou 'sound' (un son)." },
+  { fr: 'main', en: 'hand', kind: 'word' },
+  { fr: 'sort', en: 'fate', kind: 'word' },
+  { fr: 'attend', en: 'waits for', kind: 'word' },
+  { fr: 'place', en: 'square/seat', kind: 'word' },
+
+  // ---- Common nouns ----
+  { fr: 'embouteillage', en: 'traffic jam', kind: 'word' },
+  { fr: 'boulangerie', en: 'bakery', kind: 'word' },
+  { fr: 'réunion', en: 'meeting', kind: 'word' },
+  { fr: 'entretien', en: 'interview', kind: 'word' },
+  { fr: 'voiture', en: 'car', kind: 'word' },
+  { fr: 'travail', en: 'work', kind: 'word' },
+  { fr: 'patron', en: 'boss', kind: 'word' },
+  { fr: 'collègue', en: 'colleague', kind: 'word' },
+  { fr: 'ordinateur', en: 'computer', kind: 'word' },
+  { fr: 'portable', en: 'cell phone', kind: 'word' },
+  { fr: 'valise', en: 'suitcase', kind: 'word' },
+  { fr: 'quartier', en: 'neighborhood', kind: 'word' },
+  { fr: 'magasin', en: 'store', kind: 'word' },
+  { fr: 'caisse', en: 'checkout', kind: 'word' },
+  { fr: 'facture', en: 'bill', kind: 'word' },
+  { fr: 'loyer', en: 'rent', kind: 'word' },
+  { fr: 'banlieue', en: 'suburb', kind: 'word' },
+  { fr: 'métro', en: 'subway', kind: 'word' },
+  { fr: 'gare', en: 'train station', kind: 'word' },
+  { fr: 'aéroport', en: 'airport', kind: 'word' },
+  { fr: 'billet', en: 'ticket', kind: 'word' },
+  { fr: 'horaire', en: 'schedule', kind: 'word' },
+  { fr: 'dossier', en: 'file', kind: 'word' },
+  { fr: 'tâche', en: 'task', kind: 'word' },
+  { fr: 'échéance', en: 'deadline', kind: 'word' },
+  { fr: 'courses', en: 'groceries', kind: 'word' },
+  { fr: 'cuisine', en: 'kitchen', kind: 'word' },
+  { fr: 'chambre', en: 'bedroom', kind: 'word' },
+  { fr: 'salon', en: 'living room', kind: 'word' },
+  { fr: 'jardin', en: 'garden', kind: 'word' },
+  { fr: 'voisin', en: 'neighbor', kind: 'word' },
+  { fr: 'copain', en: 'buddy', kind: 'word' },
+  { fr: 'copine', en: 'girlfriend', kind: 'word' },
+  { fr: 'mari', en: 'husband', kind: 'word' },
+  { fr: 'épouse', en: 'wife', kind: 'word' },
+  { fr: 'enfant', en: 'child', kind: 'word' },
+  { fr: 'garçon', en: 'boy', kind: 'word' },
+  { fr: 'oiseau', en: 'bird', kind: 'word' },
+  { fr: 'vélo', en: 'bike', kind: 'word' },
+  { fr: 'camion', en: 'truck', kind: 'word' },
+  { fr: 'route', en: 'road', kind: 'word' },
+  { fr: 'rue', en: 'street', kind: 'word' },
+  { fr: 'pont', en: 'bridge', kind: 'word' },
+  { fr: 'hôpital', en: 'hospital', kind: 'word' },
+  { fr: 'médecin', en: 'doctor', kind: 'word' },
+  { fr: 'infirmière', en: 'nurse', kind: 'word' },
+  { fr: 'pharmacie', en: 'pharmacy', kind: 'word' },
+  { fr: 'ordonnance', en: 'prescription', kind: 'word' },
+  { fr: 'vacances', en: 'vacation', kind: 'word' },
+  { fr: 'semaine', en: 'week', kind: 'word' },
+  { fr: 'soirée', en: 'evening party', kind: 'word' },
+  { fr: 'matin', en: 'morning', kind: 'word' },
+  { fr: 'soir', en: 'evening', kind: 'word' },
+  { fr: 'nuit', en: 'night', kind: 'word' },
+  { fr: 'repas', en: 'meal', kind: 'word' },
+  { fr: 'déjeuner', en: 'lunch', kind: 'word' },
+  { fr: 'dîner', en: 'dinner', kind: 'word' },
+  { fr: 'addition', en: 'check', kind: 'word', note: "L'addition au restaurant, pas un calcul." },
+  { fr: 'pourboire', en: 'tip', kind: 'word' },
+  { fr: 'serveur', en: 'waiter', kind: 'word' },
+  { fr: 'serveuse', en: 'waitress', kind: 'word' },
+  { fr: 'client', en: 'customer', kind: 'word' },
+  { fr: 'argent', en: 'money', kind: 'word' },
+  { fr: 'monnaie', en: 'change', kind: 'word' },
+  { fr: 'virement', en: 'bank transfer', kind: 'word' },
+  { fr: 'impôts', en: 'taxes', kind: 'word' },
+  { fr: 'salaire', en: 'salary', kind: 'word' },
+  { fr: 'augmentation', en: 'raise', kind: 'word' },
+  { fr: 'licenciement', en: 'layoff', kind: 'word' },
+  { fr: 'démission', en: 'resignation', kind: 'word' },
+  { fr: 'embauche', en: 'hiring', kind: 'word' },
+  { fr: 'candidature', en: 'job application', kind: 'word' },
+  { fr: 'formation', en: 'training', kind: 'word' },
+  { fr: 'diplôme', en: 'degree', kind: 'word' },
+  { fr: 'université', en: 'university', kind: 'word' },
+  { fr: 'lycée', en: 'high school', kind: 'word' },
+  { fr: 'collège', en: 'middle school', kind: 'word', note: "Pas 'college' anglais (études supérieures)." },
+  { fr: 'professeur', en: 'teacher', kind: 'word' },
+  { fr: 'élève', en: 'student', kind: 'word' },
+  { fr: 'devoirs', en: 'homework', kind: 'word' },
+  { fr: 'examen', en: 'exam', kind: 'word' },
+  { fr: 'cahier', en: 'notebook', kind: 'word' },
+  { fr: 'stylo', en: 'pen', kind: 'word' },
+  { fr: 'crayon', en: 'pencil', kind: 'word' },
+  { fr: 'journal', en: 'newspaper', kind: 'word' },
+  { fr: 'émission', en: 'TV show', kind: 'word' },
+  { fr: 'chaîne', en: 'channel', kind: 'word' },
+  { fr: 'frigo', en: 'fridge', kind: 'word' },
+  { fr: 'poêle', en: 'frying pan', kind: 'word' },
+  { fr: 'évier', en: 'sink', kind: 'word' },
+  { fr: 'douche', en: 'shower', kind: 'word' },
+  { fr: 'serviette', en: 'towel', kind: 'word' },
+  { fr: 'savon', en: 'soap', kind: 'word' },
+  { fr: 'dentifrice', en: 'toothpaste', kind: 'word' },
+  { fr: 'maquillage', en: 'makeup', kind: 'word' },
+
+  // ---- Common verbs ----
+  { fr: 'rater', en: 'to miss/fail', kind: 'word' },
+  { fr: 'bosser', en: 'to work', kind: 'word', note: 'Familier.' },
+  { fr: 'bouffer', en: 'to eat', kind: 'word', note: 'Familier.' },
+  { fr: 'gérer', en: 'to manage/handle', kind: 'word' },
+  { fr: 'réfléchir', en: 'to think it over', kind: 'word' },
+  { fr: 'emménager', en: 'to move in', kind: 'word' },
+  { fr: 'déménager', en: 'to move house', kind: 'word' },
+  { fr: 'klaxonner', en: 'to honk', kind: 'word' },
+  { fr: "s'inscrire", en: 'to sign up', kind: 'word' },
+  { fr: 'râler', en: 'to complain', kind: 'word' },
+  { fr: 'travailler', en: 'to work', kind: 'word' },
+  { fr: 'chercher', en: 'to look for', kind: 'word' },
+  { fr: 'attendre', en: 'to wait for', kind: 'word' },
+  { fr: 'trouver', en: 'to find', kind: 'word' },
+  { fr: 'oublier', en: 'to forget', kind: 'word' },
+
+  // ---- Common adjectives ----
+  { fr: 'fatigué', en: 'tired', kind: 'word' },
+  { fr: 'content', en: 'happy', kind: 'word', note: "Pas 'content' (contenu) en anglais." },
+  { fr: 'occupé', en: 'busy', kind: 'word' },
+  { fr: 'énervé', en: 'annoyed', kind: 'word' },
+  { fr: 'débordé', en: 'overwhelmed/swamped', kind: 'word' },
+  { fr: 'marrant', en: 'funny', kind: 'word' },
+  { fr: 'chouette', en: 'cool/neat', kind: 'word' },
+  { fr: 'sympa', en: 'nice/cool', kind: 'word' },
+  { fr: 'bizarre', en: 'weird', kind: 'word' },
+  { fr: 'gratuit', en: 'free', kind: 'word', note: 'Sans payer, pas « libre ».' },
+  { fr: 'compliqué', en: 'complicated', kind: 'word' },
+
+  // ---- Phrases ----
+  { fr: 'du coup', en: 'so', kind: 'phrase', note: 'Ou "as a result".', example: 'Du coup, on y va ? -> So, shall we go?' },
+  { fr: 'en fait', en: 'actually', kind: 'phrase', example: 'En fait, je ne sais pas -> Actually, I don\'t know' },
+  { fr: "c'est-à-dire", en: 'I mean', kind: 'phrase', note: 'Ou "that is to say".' },
+  { fr: 'je sais pas', en: "I don't know", kind: 'phrase' },
+  { fr: 'tu vois', en: 'you see', kind: 'phrase' },
+  { fr: "n'importe quoi", en: 'nonsense/whatever', kind: 'phrase' },
+  { fr: 'pas de souci', en: 'no worries', kind: 'phrase' },
+  { fr: 'à plus', en: 'see you later', kind: 'phrase' },
+  { fr: 'à tout de suite', en: 'see you in a bit', kind: 'phrase' },
+  { fr: 'de rien', en: "you're welcome", kind: 'phrase' },
+  { fr: 'avec plaisir', en: 'my pleasure', kind: 'phrase' },
+  { fr: 'comme ci comme ça', en: 'so-so', kind: 'phrase' },
+  { fr: "tout à l'heure", en: 'in a bit', kind: 'phrase' },
+  { fr: 'quand même', en: 'still/anyway', kind: 'phrase' },
+  { fr: 'par contre', en: 'however', kind: 'phrase' },
+  { fr: "n'est-ce pas", en: "isn't it/right", kind: 'phrase' },
+  { fr: 'tout de suite', en: 'right away', kind: 'phrase' },
+  { fr: 'au final', en: 'in the end', kind: 'phrase' },
+  { fr: 'à la limite', en: 'if anything', kind: 'phrase' },
+  { fr: 'ça marche', en: 'sounds good', kind: 'phrase' },
+  { fr: 'pas mal', en: 'not bad', kind: 'phrase' },
+  { fr: 'sans doute', en: 'no doubt/probably', kind: 'phrase' },
+  { fr: 'bien sûr', en: 'of course', kind: 'phrase' },
+  { fr: 'tout à fait', en: 'exactly/absolutely', kind: 'phrase' },
+  { fr: 'ça va', en: "it's fine/are you OK", kind: 'phrase' },
+  { fr: 'lettre de motivation', en: 'cover letter', kind: 'phrase' },
+
+  // ---- Fillers (comma-independent; see detector.ts, which never relies on
+  // punctuation to find these) ----
+  { fr: 'euh', en: 'um', kind: 'filler' },
+  { fr: 'bref', en: 'anyway', kind: 'filler' },
+  { fr: 'genre', en: 'like/kind of', kind: 'filler', note: '"a music genre"/"the genre" = anglais normal, pas un remplissage.' },
+  { fr: 'enfin', en: 'well/I mean', kind: 'filler' },
+  { fr: 'bah', en: 'well', kind: 'filler' },
+  { fr: 'ben', en: 'well', kind: 'filler' },
+
+  // ---- False friends (French words that resemble English but mean
+  // something else; fed into the tutor prompt by enFalseFriends.ts's
+  // cousin list and shown as a correcting cue here) ----
+  { fr: 'actuellement', en: 'currently', kind: 'false_friend', note: "Pas 'actually'." },
+  { fr: 'éventuellement', en: 'possibly', kind: 'false_friend', note: "Pas 'eventually'." },
+  { fr: 'librairie', en: 'bookshop', kind: 'false_friend', note: "Pas 'library' (bibliothèque)." },
+  { fr: 'assister', en: 'to attend', kind: 'false_friend', note: "'assister à' = attend, pas 'to assist'." },
+  { fr: 'sensible', en: 'sensitive', kind: 'false_friend', note: "Pas 'sensible' anglais (raisonnable)." },
+  { fr: 'achever', en: 'to finish/complete', kind: 'false_friend', note: "Pas 'to achieve' (atteindre)." },
+  { fr: 'rester', en: 'to stay', kind: 'false_friend', note: "Pas 'to rest' (se reposer)." },
+  { fr: 'blesser', en: 'to hurt/injure', kind: 'false_friend', note: "Pas 'to bless' (bénir)." },
+  { fr: 'chair', en: 'flesh', kind: 'false_friend', note: "Pas une 'chair' anglaise (une chaise)." },
+  { fr: 'déception', en: 'disappointment', kind: 'false_friend', note: "Pas 'deception' (tromperie)." },
+  { fr: 'affaire', en: 'deal/business matter', kind: 'false_friend', note: "Pas 'affair' (liaison amoureuse)." },
+  { fr: 'ignorer', en: 'to not know/be unaware of', kind: 'false_friend', note: "Pas 'to ignore' volontairement." },
+];
