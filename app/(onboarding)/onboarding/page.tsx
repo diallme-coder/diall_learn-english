@@ -62,6 +62,7 @@ export default function OnboardingPage() {
   }
 
   async function handleRecordRequested(question: PlacementQuestion): Promise<number> {
+    if (question.kind !== 'speak') return 0; // PlacementQuiz only invokes this for 'speak' questions
     const result = await recordPlacement(question.referenceText);
     if (result.status === 'ok' && result.response?.status === 'ok' && result.response?.report?.overall !== null && result.response?.report?.overall !== undefined) {
       return (result.response?.report?.overall ?? 0) / 100;
