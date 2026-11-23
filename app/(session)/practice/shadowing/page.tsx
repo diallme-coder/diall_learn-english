@@ -4,7 +4,7 @@
 // `?set=` optionally scopes to one level's set; otherwise defaults to A1.
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useMemo, useState } from 'react';
+import { Suspense, useMemo, useState } from 'react';
 import { useAppShell } from '../../../../src/components/core/providers.tsx';
 import ShadowingPlayer from '../../../../src/components/core/ShadowingPlayer.tsx';
 import WordHighlight from '../../../../src/components/core/WordHighlight.tsx';
@@ -25,7 +25,7 @@ function deeplinkFor(trapId: string): TrapDeeplink | null {
   return (entry?.[0] as TrapDeeplink | undefined) ?? null;
 }
 
-export default function ShadowingSessionPage() {
+function ShadowingSessionPageInner() {
   const router = useRouter();
   const params = useSearchParams();
   const { settings, dispatchLocal, userId } = useAppShell();
@@ -113,5 +113,15 @@ export default function ShadowingSessionPage() {
         <Link href={`/pronunciation?trap=${trapDeeplink}`}>{t('shadowingSeeTip', 'fr')}</Link>
       ) : null}
     </div>
+  );
+}
+
+// useSearchParams() opts this page out of static rendering, which Next.js requires to be
+// scoped behind a Suspense boundary (https://nextjs.org/docs/messages/missing-suspense-with-csr-bailout).
+export default function ShadowingSessionPage() {
+  return (
+    <Suspense fallback={null}>
+      <ShadowingSessionPageInner />
+    </Suspense>
   );
 }

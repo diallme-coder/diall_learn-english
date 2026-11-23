@@ -14,7 +14,7 @@
 // H3 handback report for the integration note.
 'use client';
 
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { Suspense, useCallback, useEffect, useRef, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import type {
   AppErrorCode,
@@ -63,7 +63,7 @@ function wordCount(text: string): number {
   return text.trim().length === 0 ? 0 : text.trim().split(/\s+/).length;
 }
 
-export default function RoleplayPage() {
+function RoleplayPageInner() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { api, settings, enqueueEvent } = useAppShell();
@@ -411,5 +411,15 @@ export default function RoleplayPage() {
         {t('ladderTextMode', chrome)}
       </button>
     </div>
+  );
+}
+
+// useSearchParams() opts this page out of static rendering, which Next.js requires to be
+// scoped behind a Suspense boundary (https://nextjs.org/docs/messages/missing-suspense-with-csr-bailout).
+export default function RoleplayPage() {
+  return (
+    <Suspense fallback={null}>
+      <RoleplayPageInner />
+    </Suspense>
   );
 }

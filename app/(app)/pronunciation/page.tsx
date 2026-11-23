@@ -3,7 +3,7 @@
 // app/(app)/pronunciation/page.tsx: the trap library, list + detail (design 03 §6).
 // `?trap=` deep-links through TRAP_DEEPLINK (h|th|vowels|stress -> a TrapCategory), per plan.
 import { useSearchParams, useRouter } from 'next/navigation';
-import { useEffect, useMemo, useState } from 'react';
+import { Suspense, useEffect, useMemo, useState } from 'react';
 import { useAppShell } from '../../../src/components/core/providers.tsx';
 import TrapCard from '../../../src/components/core/TrapCard.tsx';
 import { TRAPS } from '../../../src/lib/pronunciation/traps.ts';
@@ -15,7 +15,7 @@ import type { AgeBand, PronunciationReport, TrapCategory, TrapDeeplink } from '.
 import { TRAP_DEEPLINK } from '../../../src/lib/types.ts';
 import { t } from '../../../src/lib/ui/strings.ts';
 
-export default function PronunciationPage() {
+function PronunciationPageInner() {
   const router = useRouter();
   const params = useSearchParams();
   const { api, session } = useAppShell();
@@ -82,5 +82,15 @@ export default function PronunciationPage() {
         })}
       </ul>
     </div>
+  );
+}
+
+// useSearchParams() opts this page out of static rendering, which Next.js requires to be
+// scoped behind a Suspense boundary (https://nextjs.org/docs/messages/missing-suspense-with-csr-bailout).
+export default function PronunciationPage() {
+  return (
+    <Suspense fallback={null}>
+      <PronunciationPageInner />
+    </Suspense>
   );
 }

@@ -13,7 +13,7 @@
 //                             the review is never sent back to the server after it is fetched)
 'use client';
 
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { Suspense, useCallback, useEffect, useRef, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import type {
   AppErrorCode,
@@ -55,7 +55,7 @@ function formatElapsed(ms: number): string {
   return `${mm}:${ss}`;
 }
 
-export default function DebatePage() {
+function DebatePageInner() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { api, bucket, dispatchLocal, enqueueEvent, userId } = useAppShell();
@@ -365,5 +365,15 @@ export default function DebatePage() {
         {t('ladderTextMode', CHROME)}
       </button>
     </div>
+  );
+}
+
+// useSearchParams() opts this page out of static rendering, which Next.js requires to be
+// scoped behind a Suspense boundary (https://nextjs.org/docs/messages/missing-suspense-with-csr-bailout).
+export default function DebatePage() {
+  return (
+    <Suspense fallback={null}>
+      <DebatePageInner />
+    </Suspense>
   );
 }
