@@ -47,7 +47,7 @@ export default function AgeGate({ mode = 'fr', onContinue }: AgeGateProps) {
           type="button"
           className="btn"
           disabled={choice === null}
-          onClick={() => choice && choice !== 'under15' && onContinue(choice)}
+          onClick={() => choice && onContinue(choice)}
         >
           {t('ageGateContinue', mode)}
         </button>
