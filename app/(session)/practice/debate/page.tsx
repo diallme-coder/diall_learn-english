@@ -146,7 +146,7 @@ export default function DebatePage() {
       // Unlike the live card-skipping below, full conversational context still matters here —
       // debate is unscripted, so the model needs the prior exchange to reply coherently, same
       // windowing (last LIMITS.chatHistoryWindow messages) as roleplay/page.tsx's sendToChat.
-      const nextHistory: ChatMessage[] = [...chatHistoryRef.current, { role: 'user', content: userText }].slice(
+      const nextHistory: ChatMessage[] = [...chatHistoryRef.current, { role: 'user' as const, content: userText }].slice(
         -LIMITS.chatHistoryWindow,
       );
       chatHistoryRef.current = nextHistory;
@@ -161,7 +161,7 @@ export default function DebatePage() {
       // design 03 §5: no LIVE Franglais side-cards at C1 — chatResponse.codeSwitch is still
       // returned by the server, but intentionally unused here; the full set is recomputed by
       // the debate_feedback call at end-of-call and shown in the post-call review instead.
-      chatHistoryRef.current = [...nextHistory, { role: 'assistant', content: chatResponse.reply }].slice(
+      chatHistoryRef.current = [...nextHistory, { role: 'assistant' as const, content: chatResponse.reply }].slice(
         -LIMITS.chatHistoryWindow,
       );
       appendAssistantMessage(chatResponse.reply);

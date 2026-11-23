@@ -189,7 +189,7 @@ export default function RoleplayPage() {
 
   const sendToChat = useCallback(
     async (userText: string) => {
-      const nextHistory: ChatMessage[] = [...chatHistoryRef.current, { role: 'user', content: userText }].slice(
+      const nextHistory: ChatMessage[] = [...chatHistoryRef.current, { role: 'user' as const, content: userText }].slice(
         -LIMITS.chatHistoryWindow,
       );
       chatHistoryRef.current = nextHistory;
@@ -217,7 +217,7 @@ export default function RoleplayPage() {
         for (const card of codeSwitch.cards) setSideCardQueue((q) => enqueueSideCard(q, card, Date.now()));
         codeSwitchCountRef.current += codeSwitch.cards.length;
       }
-      chatHistoryRef.current = [...nextHistory, { role: 'assistant', content: chatResponse.reply }].slice(
+      chatHistoryRef.current = [...nextHistory, { role: 'assistant' as const, content: chatResponse.reply }].slice(
         -LIMITS.chatHistoryWindow,
       );
       sayAssistantLine(chatResponse.reply);
